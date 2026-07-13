@@ -10,5 +10,5 @@ If you find this tool useful, you can support me on [Ko-fi](https://ko-fi.com/tk
 
 ## Libraries
 
-[**Coremats**](https://github.com/JKAnderson/Coremats) ([License](https://github.com/JKAnderson/Coremats?tab=GPL-3.0-1-ov-file))
+[**Coremats**](https://github.com/JKAnderson/Coremats) ([License](https://github.com/JKAnderson/Coremats?tab=GPL-3.0-1-ov-file))  
 [**System.CommandLine**](https://github.com/dotnet/command-line-api) ([License](https://github.com/dotnet/command-line-api?tab=MIT-1-ov-file))
