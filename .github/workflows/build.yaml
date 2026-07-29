@@ -1,0 +1,20 @@
+on:
+  push:
+    branches: ["**"]
+
+jobs:
+  publish-build:
+    name: Publish build
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v7
+
+    - name: Set build title
+      run: echo "TITLE=unpoka-${GITHUB_SHA::16}" | tee $GITHUB_ENV
+
+    - name: Publish all targets
+      uses: ./.github/actions/publish-all
+      with:
+        title: ${{ env.TITLE }}

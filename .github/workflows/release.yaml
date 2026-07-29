@@ -1,33 +1,23 @@
 on:
   push:
-    tags: ['v*']
-
-defaults:
-  run:
-    shell: bash
+    tags: ["v*"]
 
 jobs:
-  publish:
-    runs-on: windows-latest
+  publish-release:
+    name: Publish release
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout
-      uses: actions/checkout@v6
+      uses: actions/checkout@v7
 
-    - name: Get tag version
+    - name: Get version from tag
       run: echo "VERSION=${GITHUB_REF_NAME/#v}" | tee $GITHUB_ENV
-    
+
     - name: Set release title
-      run: echo "TITLE=unpoka ${VERSION}" | tee $GITHUB_ENV
-    
-    - name: Publish
-      run: dotnet publish unpoka -o "publish/${TITLE}" -p:PublishSingleFile=true --no-self-contained
-    
-    - name: Copy dist files
-      run: cp -r dist/* "publish/${TITLE}"
-    
-    - name: Upload artifact
-      uses: actions/upload-artifact@v7
+      run: echo "TITLE=unpoka-${VERSION}" | tee $GITHUB_ENV
+
+    - name: Publish all targets
+      uses: ./.github/actions/publish-all
       with:
-        name: ${{ env.TITLE }}
-        path: publish
+        title: ${{ env.TITLE }}
