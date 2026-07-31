@@ -48,7 +48,7 @@ internal class Program
         }
         catch (FriendlyException ex) when (ex.InnerException == null)
         {
-            Console.WriteLine($"""
+            WriteLineColored(ConsoleColor.Red, $"""
 
                 {ex.Message}
 
@@ -57,7 +57,7 @@ internal class Program
         }
         catch (FriendlyException ex)
         {
-            Console.WriteLine($"""
+            WriteLineColored(ConsoleColor.Red, $"""
                         
                 {ex}
 
@@ -69,7 +69,7 @@ internal class Program
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"""
+            WriteLineColored(ConsoleColor.Red, $"""
 
                 {ex}
 
@@ -78,6 +78,20 @@ internal class Program
                     
                 """);
             return 1;
+        }
+    }
+
+    private static void WriteLineColored(ConsoleColor color, string message)
+    {
+        var prev = Console.ForegroundColor;
+        Console.ForegroundColor = color;
+        try
+        {
+            Console.WriteLine(message);
+        }
+        finally
+        {
+            Console.ForegroundColor = prev;
         }
     }
 }
