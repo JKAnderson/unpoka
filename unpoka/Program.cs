@@ -46,37 +46,28 @@ internal class Program
             Unpacker.Unpack(inputDir, outputDir);
             return 0;
         }
-        catch (FriendlyException ex) when (ex.InnerException == null)
-        {
-            WriteLineColored(ConsoleColor.Red, $"""
-
-                {ex.Message}
-
-                """);
-            return 1;
-        }
-        catch (FriendlyException ex)
-        {
-            WriteLineColored(ConsoleColor.Red, $"""
-                        
-                {ex}
-
-                {ex.Message}
-                  Please include the stack trace printed above if submitting a report.
-                    
-                """);
-            return 1;
-        }
         catch (Exception ex)
         {
-            WriteLineColored(ConsoleColor.Red, $"""
+            Console.WriteLine();
+            WriteLineColored(ConsoleColor.Red, ex switch
+            {
+                FriendlyException when ex.InnerException == null => $"""
+                    {ex.Message}
+                    """,
+                FriendlyException => $"""
+                    {ex.Message}
+                      Please include the stack trace printed below if submitting a report.
 
-                {ex}
-
-                An unexpected exception occurred.
-                  Please include the stack trace printed above if submitting a report.
+                    {ex}
+                    """,
+                _ => $"""
+                    An unexpected error occurred.
+                      Please include the stack trace printed below if submitting a report.
                     
-                """);
+                    {ex}
+                    """
+            });
+            Console.WriteLine();
             return 1;
         }
     }
