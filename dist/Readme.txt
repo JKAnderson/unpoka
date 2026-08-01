@@ -1,5 +1,5 @@
 
---| unpoka 1.0.0
+--| unpoka 1.0.1
 --| https://github.com/JKAnderson/unpoka
 --| By TKGP https://tkgp.neocities.org/
 
@@ -22,3 +22,11 @@ You'll need to find your own copy of the game first; mount or extract the ROM ho
 If you want to be lazy, you can simply drop unpoka.exe into your USRDIR directory alongside the POKAPOKA files and run it; the default options will work fine for unpacking to the same directory.
 If you want to be slightly less lazy, unpoka accepts two options: -i to specify the input directory, and -o to specify the output directory. Both are optional, and will default to the working directory.
 You can also specify --help to basically read what I just said again but worded slightly differently.
+
+
+Changelog
+---------
+
+1.0.1
+- Builds are now available for Windows, Linux, and Mac
+- Slightly nicer error messages
